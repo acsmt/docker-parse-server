@@ -1,6 +1,6 @@
 {
   "name": "docker-parse-server",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Parse Server as docker container",
   "main": "index.js",
   "repository": {
