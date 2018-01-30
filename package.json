@@ -9,18 +9,27 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
     "docker-links": "^1.0.2",
     "ejs": "^2.5.7",
     "express": "~4.14.x",
     "express-graphql": "^0.6.1",
+    "express-jwt": "^5.3.0",
     "graphql": "^0.11.0",
+    "helmet": "^3.9.0",
+    "html-minifier": "^3.5.8",
+    "jsonwebtoken": "^8.1.0",
     "kerberos": "~0.0.x",
     "mongodb": "2.2.19",
     "nodemon": "^1.11.0",
     "parse": "~1.9.2",
+    "parse-express-https-redirect": "0.0.1",
     "parse-server": "^2.7.1",
     "parse-server-azure-storage": "^1.1.0",
-    "parse-server-mailgun-adapter-template": "^1.1.7"
+    "parse-server-mailgun-adapter-template": "^1.1.7",
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "start": "nodemon --watch /parse/cloud index.js"

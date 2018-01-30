@@ -77,7 +77,12 @@ server {
 {{ $hostArrayLength := len $hostArray }}
 {{ $host := $hostAddr }}
 
-upstream {{ $hostAddr }} {
+{{ if gt $hostArrayLength 2 }}
+ {{ $serverPort := last $hostArray }}
+ upstream {{ $hostAddr }}_{{ $serverPort}} {
+{{ else }}
+ upstream {{ $hostAddr }} {
+{{ end }}
 
 {{ range $index, $value := $containers }}
 
@@ -158,7 +163,12 @@ server {
 
 server {
     server_name {{ $host }};
-    listen 443 ssl http2 {{ $default_server }};
+    {{ if gt $hostArrayLength 2 }}
+     {{ $serverPort := last $hostArray }}
+     listen {{ $serverPort }}  ssl http2 {{ $default_server }};
+    {{ else }}
+     listen 443  ssl http2 {{ $default_server }};
+    {{ end }}
     access_log /var/log/nginx/access.log vhost;
 
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
@@ -184,7 +194,12 @@ server {
     {{ end }}
 
     location / {
-        proxy_pass {{ trim $proto }}://{{ trim $host }};
+        {{ if gt $hostArrayLength 2 }}
+         {{ $serverPort := last $hostArray }}
+         proxy_pass {{ trim $proto }}://{{ trim $host }}_{{ $serverPort }};
+        {{ else }}
+         proxy_pass {{ trim $proto }}://{{ trim $host }};
+        {{ end }}
         {{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
         auth_basic  "Restricted {{ $host }}";
         auth_basic_user_file    {{ (printf "/etc/nginx/htpasswd/%s" $host) }};
