@@ -29,7 +29,9 @@
     "parse-server": "^2.7.1",
     "parse-server-azure-storage": "^1.1.0",
     "parse-server-mailgun-adapter-template": "^1.1.7",
-    "underscore": "^1.8.3"
+    "threads": "^0.10.1",
+    "underscore": "^1.8.3",
+    "ws": "^4.0.0"
   },
   "scripts": {
     "start": "nodemon --watch /parse/cloud index.js"
